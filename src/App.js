@@ -8,6 +8,7 @@ import ProductDetailPage from './pages/ProductDetailPage';
 function App() {
   return (
     <>
+    <MainLayout>
       <BrowserRouter>
         <Routes>
           <Route index element={<HomePage/>}/>
@@ -15,6 +16,7 @@ function App() {
           <Route path='/product-detail' element={<ProductDetailPage/>}/>
         </Routes>
       </BrowserRouter>
+      </MainLayout>
     </>
   );
 }

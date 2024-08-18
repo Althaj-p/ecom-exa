@@ -13,6 +13,7 @@ export default function HomePage() {
             <CategorySection />
             <ProductDisplay />
             {/* <h2>Home Page Content Here...</h2> */}
-        </MainLayout>
+        {/* </MainLayout> */}
+    </>
     )
 }
