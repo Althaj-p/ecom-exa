@@ -5,7 +5,9 @@ import Category from '../components/Category';
 import CategorySection from '../components/HomeCategoryItems';
 export default function HomePage() {
     return (
-        <MainLayout>
+        // <MainLayout>
+        <>
+        
             <Category />
             <Banner />
             <CategorySection />
@@ -13,7 +15,8 @@ export default function HomePage() {
             <CategorySection />
             <ProductDisplay />
             {/* <h2>Home Page Content Here...</h2> */}
-        {/* </MainLayout> */}
-    </>
+            </>
+        // </MainLayout>
+    // </>
     )
 }
