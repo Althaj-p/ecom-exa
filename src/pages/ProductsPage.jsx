@@ -3,9 +3,11 @@ import MainLayout from './MainLayout';
 import Category from '../components/Category';
 export default function ProductsPage() {
     return (
-        <MainLayout>
+        // <MainLayout>
+        <>
             <Category/>
             <ProductDisplay />
-        </MainLayout>
+            </>
+        // </MainLayout>
     )
 }

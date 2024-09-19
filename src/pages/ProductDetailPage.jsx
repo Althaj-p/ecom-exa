@@ -48,9 +48,9 @@ export default function ProductDetailPage() {
     
           
     return (
-        <MainLayout>
+      <>
             <Category/>
             <ProductDetail product={product} />
-        </MainLayout>
+      </>
     )
 }
