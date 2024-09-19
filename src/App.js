@@ -1,5 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svg';
+// import './App.css';
+// import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// import HomePage from './pages/HomePage';
+// import ProductsPage from './pages/ProductsPage';
+// import ProductDetailPage from './pages/ProductDetailPage';
+// import MainLayout from './pages/MainLayout';
+
+// function App() {
+//   return (
+//     <>
+//     <MainLayout>
+//       <BrowserRouter>
+//         <Routes>
+//           <Route index element={<HomePage/>}/>
+//           <Route path='/products' element={<ProductsPage/>}/>
+//           <Route path='/product-detail' element={<ProductDetailPage/>}/>
+//         </Routes>
+//       </BrowserRouter>
+//       </MainLayout>
+//     </>
+//   );
+// }
+
+// export default App;
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
@@ -9,18 +32,18 @@ import WishList from './pages/WishList';
 
 function App() {
   return (
-    <>
-    <MainLayout>
-      <BrowserRouter>
+    <BrowserRouter>
+      {/* <MainLayout> */}
         <Routes>
-          <Route index element={<HomePage/>}/>
-          <Route path='/products' element={<ProductsPage/>}/>
-          <Route path='/product-detail' element={<ProductDetailPage/>}/>
-          <Route path='/wish-list' element={<WishList/>}/>
+          <Route element={<MainLayout/>}>
+            <Route index element={<HomePage />} />
+            <Route path='/products' element={<ProductsPage />} />
+            <Route path='/product-detail' element={<ProductDetailPage />} />
+            <Route path='/wish-list' element={<WishList/>}/>
+          </Route>
         </Routes>
-      </BrowserRouter>
-      </MainLayout>
-    </>
+      {/* </MainLayout> */}
+    </BrowserRouter>
   );
 }
 
