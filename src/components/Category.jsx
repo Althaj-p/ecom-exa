@@ -82,6 +82,9 @@
 
 
 import { Container, Box, Typography } from '@mui/material';
+import { useState,useEffect } from 'react';
+import Axios from "axios";
+import constants from '../data/constants';
 
 const categories = [
   { src: "https://via.placeholder.com/300x200", label: "Shoes1" },
@@ -107,6 +110,20 @@ const categories = [
 ];
 
 export default function Category() {
+  const [categories_list,setCategories] = useState([])
+  useEffect(() => {
+    Axios.get(`${constants.port}/api/categories`, {})
+      .then((res) => {
+        if (res.data.status === 1) {
+            setCategories(res.data.data);
+        }
+        console.log(res.data.data, "result");
+      })
+      .catch((error) => {
+        console.log("Error Fetching blogs");
+      });
+  }, []);
+
   return (
     <Container style={{
       overflowX: 'auto', whiteSpace: 'nowrap', padding: '20px', scrollbarWidth: 'none' /* For Firefox */,
@@ -120,7 +137,7 @@ export default function Category() {
           }
         `}
       </style>
-      {categories.map((category, index) => (
+      {categories_list.map((category, index) => (
         <Box
           key={index}
           component="a"
@@ -130,12 +147,12 @@ export default function Category() {
           style={{ marginRight: '20px' }}
         >
           <img
-            src={category.src}
-            alt={category.label || "Category Image"}
+            src={`${constants.port}/${category.image}`}
+            alt={category.name || "Category Image"}
             style={{ width: 100, height: 100 }}
           />
-          {category.label && (
-            <Typography variant="body1">{category.label}</Typography>
+          {category.name && (
+            <Typography variant="body1">{category.name}</Typography>
           )}
         </Box>
       ))}
