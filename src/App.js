@@ -29,6 +29,9 @@ import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import MainLayout from './pages/MainLayout';
 import WishList from './pages/WishList';
+import Chat from './pages/chatPage1';
+import ChatRoom from './pages/chatPage';
+import ChatList from './pages/chatlist';
 
 function App() {
   return (
@@ -40,6 +43,9 @@ function App() {
             <Route path='/products' element={<ProductsPage />} />
             <Route path='/product-detail/:slug' element={<ProductDetailPage />} />
             <Route path='/wish-list' element={<WishList/>}/>
+            {/* <Route path='/chat' element={<ChatRoom/>}/> */}
+            <Route path="/chat" element={<ChatList />} />
+            <Route path="/chat/:roomId" element={<ChatRoom />} />
           </Route>
         </Routes>
       {/* </MainLayout> */}
