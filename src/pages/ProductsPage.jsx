@@ -5,7 +5,7 @@ export default function ProductsPage() {
     return (
         // <MainLayout>
         <>
-            <Category/>
+            {/* <Category/> */}
             <ProductDisplay />
             </>
         // </MainLayout>

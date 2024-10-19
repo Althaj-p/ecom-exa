@@ -165,7 +165,11 @@
 // }
 import React from "react";
 import { Grid, Card, CardMedia, CardContent, Typography, Button, Checkbox, FormControlLabel, FormGroup, Slider } from "@mui/material";
-
+import { useEffect,useState } from "react";
+import Axios from "axios";
+import { Api } from "../data/Api";
+import constants from "../data/constants";
+import { Link } from "react-router-dom";
 const products = [
   {
     id: 1,
@@ -205,16 +209,34 @@ const products = [
   },
 ];
 
-export default function ProductDisplay() {
+export default function ProductDisplay() {  
   const [priceRange, setPriceRange] = React.useState([0, 1000]);
-
+  const [products,setProducts] = useState([]);
   const handlePriceChange = (event, newValue) => {
     setPriceRange(newValue);
   };
 
+  useEffect(()=>{
+    console.log(Api.products,'url')
+    Axios.get(Api.products).then((res) => {
+      if (res.data.status == 1){
+        console.log('getitems')
+        console.log(res.data)
+        setProducts(res.data.variants);
+      }else{
+        console.log('error')
+        // throw new Error(`HTTP error! status: ${res.status}`);
+      }
+    })
+    .catch((error) => {
+      console.log('error occured!!')
+      // console.error('There was an error!', error.res.status);
+    })
+  },[])
+
   return (
     <Grid container spacing={2} p={5}>
-      <Grid item xs={12} sm={4} md={3}>
+      {/* <Grid item xs={12} sm={4} md={3}>
         <Card sx={{ padding: 2 }}>
           <Typography variant="h6" gutterBottom>
             Filters
@@ -251,31 +273,33 @@ export default function ProductDisplay() {
             <FormControlLabel control={<Checkbox />} label="Out of Stock" />
           </FormGroup>
         </Card>
-      </Grid>
+      </Grid> */}
       <Grid item xs={12} sm={8} md={9}>
         <Grid container spacing={2}>
-          {products.map((product) => (
+          {products && products.map((product) => (
             <Grid key={product.id} item xs={12} sm={6} md={4}>
+              <Link to={`/product-detail/${product.slug}`}>
               <Card>
                 <CardMedia
                   component="img"
                   height="200"
-                  image={product.image}
-                  alt={product.name}
+                  image={`${constants.port}${product.variant_images[0].image}`}
+                  alt={product.variant_name}
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    {product.name}
+                    {product.product.name}-{product.variant_name}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {product.description}
+                    {product.product.description}
                   </Typography>
-                  <p>Rs 899</p>
+                  <p>{product.price}</p>
                 </CardContent>
                 <Button variant="contained" color="primary" sx={{ margin: 2 }}>
                   Add to Cart
                 </Button>
               </Card>
+              </Link>
             </Grid>
           ))}
         </Grid>
@@ -283,130 +307,3 @@ export default function ProductDisplay() {
     </Grid>
   );
 }
-// import React from "react";
-// import { Grid, Card, CardMedia, CardContent, Typography, Button, IconButton, Badge } from "@mui/material";
-// import { FavoriteBorder, Star, LocalOffer } from "@mui/icons-material";
-
-// const products = [
-//   {
-//     id: 1,
-//     name: "Product 1",
-//     image: "https://via.placeholder.com/300x200",
-//     description: "Description of Product 1",
-//     rating: 4,
-//     stock: 20,
-//     badge: "New",
-//     offer: "10% Off"
-//   },
-//   {
-//     id: 2,
-//     name: "Product 2",
-//     image: "https://via.placeholder.com/300x200",
-//     description: "Description of Product 2",
-//     rating: 5,
-//     stock: 15,
-//     badge: "Bestseller",
-//     offer: "Buy One Get One"
-//   },
-//   {
-//     id: 3,
-//     name: "Product 3",
-//     image: "https://via.placeholder.com/300x200",
-//     description: "Description of Product 3",
-//     rating: 3,
-//     stock: 0,
-//     badge: "Limited Stock",
-//     offer: "20% Off"
-//   },
-//   {
-//     id: 4,
-//     name: "Product 4",
-//     image: "https://via.placeholder.com/300x200",
-//     description: "Description of Product 4",
-//     rating: 2,
-//     stock: 30,
-//     badge: "Discounted",
-//     offer: "15% Off"
-//   },
-//   {
-//     id: 5,
-//     name: "Product 5",
-//     image: "https://via.placeholder.com/300x200",
-//     description: "Description of Product 5",
-//     rating: 4,
-//     stock: 25,
-//     badge: "Top Rated",
-//     offer: "5% Off"
-//   },
-//   {
-//     id: 6,
-//     name: "Product 6",
-//     image: "https://via.placeholder.com/300x200",
-//     description: "Description of Product 6",
-//     rating: 5,
-//     stock: 10,
-//     badge: "Popular",
-//     offer: "10% Off"
-//   },
-// ];
-
-// export default function ProductDisplay() {
-//   return (
-//     <Grid container spacing={2} p={5}>
-//       <Grid item xs={12} sm={4} md={3}>
-//         <Card sx={{ padding: 2 }}>
-//           <Typography variant="h6" gutterBottom>
-//             Filters
-//           </Typography>
-//           {/* Add filter options here */}
-//         </Card>
-//       </Grid>
-//       <Grid item xs={12} sm={8} md={9}>
-//         <Grid container spacing={2}>
-//           {products.map((product) => (
-//             <Grid key={product.id} item xs={12} sm={6} md={4}>
-//               <Card>
-//                 <CardMedia
-//                   component="img"
-//                   height="200"
-//                   image={product.image}
-//                   alt={product.name}
-//                 />
-//                 <CardContent>
-//                   <Typography gutterBottom variant="h5" component="div">
-//                     {product.name}{" "}
-//                     <Badge badgeContent={product.badge} color="primary" sx={{ ml: 1 }} />
-//                   </Typography>
-//                   <Typography variant="body2" color="text.secondary">
-//                     {product.description}
-//                   </Typography>
-//                   <Typography variant="body2" color="text.secondary">
-//                     Rating:{" "}
-//                     {[...Array(5)].map((_, index) => (
-//                       <Star key={index} color={index < product.rating ? "primary" : "disabled"} />
-//                     ))}
-//                   </Typography>
-//                   <Typography variant="body2" color="text.secondary">
-//                     Stock: {product.stock > 0 ? `${product.stock} available` : "Out of stock"}
-//                   </Typography>
-//                   <Typography variant="body2" color="text.secondary">
-//                     Offer: {product.offer}
-//                   </Typography>
-//                   <Typography variant="h5" color="black" component="p">
-//                     Rs 899
-//                   </Typography>
-//                 </CardContent>
-//                 <IconButton aria-label="add to wishlist" sx={{ position: "absolute", top: 8, right: 8 }}>
-//                   <FavoriteBorder />
-//                 </IconButton>
-//                 <Button variant="contained" color="primary" sx={{ margin: 2 }}>
-//                   Add to Cart
-//                 </Button>
-//               </Card>
-//             </Grid>
-//           ))}
-//         </Grid>
-//       </Grid>
-//     </Grid>
-//   );
-// }

@@ -38,7 +38,7 @@ function App() {
           <Route element={<MainLayout/>}>
             <Route index element={<HomePage />} />
             <Route path='/products' element={<ProductsPage />} />
-            <Route path='/product-detail' element={<ProductDetailPage />} />
+            <Route path='/product-detail/:slug' element={<ProductDetailPage />} />
             <Route path='/wish-list' element={<WishList/>}/>
           </Route>
         </Routes>
