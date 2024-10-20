@@ -12,13 +12,13 @@ const ChatList = () => {
     // Fetch chat rooms the user has participated in
     useEffect(() => {
         // const token = localStorage.getItem('access_token');
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5MzQxOTgwLCJpYXQiOjE3MjkzMzgzODAsImp0aSI6IjYyNzU5MzRiN2Q0YjQ0ZTg4MGM2YTIxZjY1NzlkZTUyIiwidXNlcl9pZCI6MX0.lbCFsTImPDTNDagNoGnKkYku80mU_RKtKBVkx1sBFY0';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDA3MzM4LCJpYXQiOjE3Mjk0MDM3MzgsImp0aSI6ImVhZTFlMmNhYzNlNDQzYmFhMmVjZjc4YTgzN2EwYzkyIiwidXNlcl9pZCI6Mn0.rmE2UfJhIZm1Yc2T0WOpSnm6BU0iRHPK-pQQVM302ZI';
         Axios.get('http://127.0.0.1:8000/api/chat/rooms',{
             headers: {
                 'Authorization': `Bearer ${token}`,  // Add Bearer token here
                 'Content-Type': 'application/json',
             },
-            withCredentials: true,
+            // withCredentials: true,
             })  // Adjust API endpoint based on your setup
             .then((response) => {
                 setChatRooms(response.data);

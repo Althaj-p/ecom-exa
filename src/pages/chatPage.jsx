@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
-const ChatRoom = ({ roomId }) => {
+const ChatRoom = ({ roomId='1111' }) => {
+    console.log(roomId,'roomid')
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
     const webSocket = useRef(null);  // Store the WebSocket instance
 
     // Fetch previous messages when the component loads
-    useEffect(() => {
-        axios.get(`/api/chat/messages/${roomId}`).then((res) => setMessages(res.data));
-    }, [roomId]);
+    // useEffect(() => {
+    //     axios.get(`/api/chat/messages/${roomId}`).then((res) => setMessages(res.data));
+    // }, [roomId]);
 
     // Set up the WebSocket connection
     useEffect(() => {
@@ -37,7 +38,7 @@ const ChatRoom = ({ roomId }) => {
         if (input.trim()) {
             webSocket.current.send(JSON.stringify({
                 message: input,
-                sender: 'customer',  // Replace with actual sender username from context
+                sender: 'admin@gmail.com',  // Replace with actual sender username from context
             }));
             setInput('');
         }
