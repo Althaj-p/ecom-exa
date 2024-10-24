@@ -12,8 +12,8 @@ const ChatList = () => {
     // Fetch chat rooms the user has participated in
     useEffect(() => {
         // const token = localStorage.getItem('access_token');
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDA3MzM4LCJpYXQiOjE3Mjk0MDM3MzgsImp0aSI6ImVhZTFlMmNhYzNlNDQzYmFhMmVjZjc4YTgzN2EwYzkyIiwidXNlcl9pZCI6Mn0.rmE2UfJhIZm1Yc2T0WOpSnm6BU0iRHPK-pQQVM302ZI';
-        Axios.get('http://127.0.0.1:8000/api/chat/rooms',{
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NzczMDI3LCJpYXQiOjE3Mjk3NjU4MjcsImp0aSI6ImZkNDg0YzZiNGUzZjQwYzJhZGY5NGYxOWY0OWUxOWEwIiwidXNlcl9pZCI6MX0.bepAHIk_2tAPJdj14v-CeQtKgeKL05wduUywaNpahS8';
+        Axios.get('http://127.0.0.1:8000/api/chat/rooms/',{
             headers: {
                 'Authorization': `Bearer ${token}`,  // Add Bearer token here
                 'Content-Type': 'application/json',
@@ -21,7 +21,9 @@ const ChatList = () => {
             // withCredentials: true,
             })  // Adjust API endpoint based on your setup
             .then((response) => {
+                console.log(response.data,'responsedata')
                 setChatRooms(response.data);
+                console.log(chatRooms,'dataroms')
                 setLoading(false);
             })
             .catch((error) => {
@@ -31,6 +33,7 @@ const ChatList = () => {
     }, []);
     
     const handleChatOpen = (roomId) => {
+        console.log(roomId,'roomId')
         navigate(`/chat/${roomId}`);  // Navigate to the chat room page
     };
 
@@ -65,7 +68,7 @@ const ChatList = () => {
                                 </Avatar>
                             </ListItemAvatar>
                             <ListItemText
-                                primary={`Support Agent: ${room.support_agent.username}`}
+                                primary={`Support Agent: ${room.support_agent.username}-${room.room_id}`}
                                 secondary={`Last message: ${room.last_message || 'No messages yet'}`}
                             />
                         </ListItem>
