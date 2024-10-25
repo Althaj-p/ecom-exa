@@ -32,23 +32,30 @@ import WishList from './pages/WishList';
 import Chat from './pages/chatPage1';
 import ChatRoom from './pages/chatPage';
 import ChatList from './pages/chatlist';
+import { AuthProvider } from './context/AuthContext';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
   return (
     <BrowserRouter>
-      {/* <MainLayout> */}
-        <Routes>
-          <Route element={<MainLayout/>}>
-            <Route index element={<HomePage />} />
-            <Route path='/products' element={<ProductsPage />} />
-            <Route path='/product-detail/:slug' element={<ProductDetailPage />} />
-            <Route path='/wish-list' element={<WishList/>}/>
-            {/* <Route path='/chat' element={<ChatRoom/>}/> */}
-            <Route path="/chat" element={<ChatList />} />
-            <Route path="/chat/:roomId" element={<ChatRoom />} />
-          </Route>
-        </Routes>
-      {/* </MainLayout> */}
+      <AuthProvider>
+        {/* <MainLayout> */}
+          <Routes>
+            <Route element={<MainLayout/>}>
+              <Route index element={<HomePage />} />
+              <Route path='/products' element={<ProductsPage />} />
+              <Route path='/product-detail/:slug' element={<ProductDetailPage />} />
+              <Route path='/wish-list' element={<WishList/>}/>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              {/* <Route path='/chat' element={<ChatRoom/>}/> */}
+              <Route path="/chat" element={<ChatList />} />
+              <Route path="/chat/:roomId" element={<ChatRoom />} />
+            </Route>
+          </Routes>
+        {/* </MainLayout> */}
+        </AuthProvider>
     </BrowserRouter>
   );
 }

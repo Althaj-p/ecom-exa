@@ -11,8 +11,8 @@ const ChatList = () => {
 
     // Fetch chat rooms the user has participated in
     useEffect(() => {
-        // const token = localStorage.getItem('access_token');
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NzczMDI3LCJpYXQiOjE3Mjk3NjU4MjcsImp0aSI6ImZkNDg0YzZiNGUzZjQwYzJhZGY5NGYxOWY0OWUxOWEwIiwidXNlcl9pZCI6MX0.bepAHIk_2tAPJdj14v-CeQtKgeKL05wduUywaNpahS8';
+        const token = localStorage.getItem('accessToken');
+        // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NzczMDI3LCJpYXQiOjE3Mjk3NjU4MjcsImp0aSI6ImZkNDg0YzZiNGUzZjQwYzJhZGY5NGYxOWY0OWUxOWEwIiwidXNlcl9pZCI6MX0.bepAHIk_2tAPJdj14v-CeQtKgeKL05wduUywaNpahS8';
         Axios.get('http://127.0.0.1:8000/api/chat/rooms/',{
             headers: {
                 'Authorization': `Bearer ${token}`,  // Add Bearer token here
