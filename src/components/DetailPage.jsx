@@ -83,8 +83,8 @@ const ProductDetail = ({ product }) => {
         {
           headers: {
             'Content-Type': 'application/json',
-            // Authorization: `Bearer ${localStorage.getItem('accessToken')}`, // Token for authentication
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwMTIwMzc4LCJpYXQiOjE3MzAxMTMxNzgsImp0aSI6IjZmMmNhNzNiYjc0ZjQ1YTdhMDBmNDMxYTVhODU1ZTc4IiwidXNlcl9pZCI6MX0.GXs60rn_z_B6QIT8wtQ_x9YDdggRoJJ6ArJnitfbrJA', // Token for authentication
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`, // Token for authentication
+            // Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwMTIwMzc4LCJpYXQiOjE3MzAxMTMxNzgsImp0aSI6IjZmMmNhNzNiYjc0ZjQ1YTdhMDBmNDMxYTVhODU1ZTc4IiwidXNlcl9pZCI6MX0.GXs60rn_z_B6QIT8wtQ_x9YDdggRoJJ6ArJnitfbrJA', // Token for authentication
           },
         }
       );
