@@ -36,6 +36,7 @@ import { AuthProvider } from './context/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Cart from './pages/Cart';
+import OrderProcess from './pages/checkout';
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
               <Route path="/chat" element={<ChatList />} />
               <Route path="/chat/:roomId" element={<ChatRoom />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<OrderProcess />} />
             </Route>
           </Routes>
         {/* </MainLayout> */}
