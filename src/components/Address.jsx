@@ -1,53 +1,3 @@
-// import * as React from 'react';
-// import List from '@mui/material/List';
-// import ListItem from '@mui/material/ListItem';
-// import ListItemButton from '@mui/material/ListItemButton';
-// import ListItemIcon from '@mui/material/ListItemIcon';
-// import ListItemText from '@mui/material/ListItemText';
-// import Radio from '@mui/material/Radio';
-// import IconButton from '@mui/material/IconButton';
-// import CommentIcon from '@mui/icons-material/Comment';
-
-// export default function AddressList() {
-//   const [selectedValue, setSelectedValue] = React.useState(null); // Single selection
-
-//   const handleToggle = (value) => () => {
-//     setSelectedValue(value); // Set the selected value
-//   };
-
-//   return (
-//     <List sx={{ width: '100%', bgcolor: 'background.paper', borderRadius: '8px', boxShadow: 1, padding: 2 }}>
-//       {[0, 1, 2, 3].map((value) => {
-//         const labelId = `radio-list-label-${value}`;
-
-//         return (
-//           <ListItem
-//             key={value}
-//             secondaryAction={
-//               <IconButton edge="end" aria-label="comments">
-//                 <CommentIcon />
-//               </IconButton>
-//             }
-//             disablePadding
-//           >
-//             <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
-//               <ListItemIcon>
-//                 <Radio
-//                   edge="start"
-//                   checked={selectedValue === value}
-//                   tabIndex={-1}
-//                   disableRipple
-//                   inputProps={{ 'aria-labelledby': labelId }}
-//                 />
-//               </ListItemIcon>
-//               <ListItemText id={labelId} primary={`Address ${value + 1}`} />
-//             </ListItemButton>
-//           </ListItem>
-//         );
-//       })}
-//     </List>
-//   );
-// }
 import React, { useState } from 'react';
 import { List, ListItem, ListItemText, ListItemButton, ListItemIcon, Radio, Typography, Button, Box, Divider } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
@@ -78,7 +28,7 @@ export default function AddressSelection() {
   };
 
   return (
-    <Box sx={{ maxWidth: 800, mx: 'auto', p: 2 }}>
+    <Box sx={{padding: '24px', bgcolor: '#f5f5f5'}}>
       <Typography variant="h6" gutterBottom>
         2 DELIVERY ADDRESS
       </Typography>
@@ -132,11 +82,11 @@ export default function AddressSelection() {
         </ListItem>
       </List>
 
-      <Box sx={{ mt: 2 }}>
-        <Button variant="contained" fullWidth color="primary">
+      {/* <Box sx={{ mt: 2 ,justifyContent:'center',display:'flex'}} >
+        <Button variant="contained"  color="primary">
           Deliver Here
         </Button>
-      </Box>
+      </Box> */}
     </Box>
   );
 }
