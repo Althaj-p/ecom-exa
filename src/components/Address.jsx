@@ -23,8 +23,8 @@ import axios from 'axios';
 //   },
 // ];
 
-export default function AddressSelection() {
-  const [selectedAddress, setSelectedAddress] = useState(1);
+export default function AddressSelection({selectedAddress,setSelectedAddress}) {
+  // const [selectedAddress, setSelectedAddress] = useState(1);
   const [addresses,setAddresses] = useState([]);
 
   const handleSelectAddress = (id) => {

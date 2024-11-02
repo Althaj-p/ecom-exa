@@ -1,26 +1,28 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import { Box, Typography, Divider, Button, Card, CardMedia, CardContent, IconButton, Grid } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Cart from './Cart';
 
 function OrderSummary() {
+
   return (
     <Box sx={{ padding: '24px', bgcolor: '#f5f5f5',}}>
       <Typography variant="h6" gutterBottom color="primary">
         Order Summary
       </Typography>
       
-      <Card variant="outlined" sx={{ display: 'flex', mb: 2 }}>
+      {/* <Card variant="outlined" sx={{ display: 'flex', mb: 2 }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', p: 2 }}>
           <Typography variant="body1" fontWeight="bold">Pay Using SuperCoins</Typography>
           <Typography variant="body2" color="text.secondary">Balance: 🪙 16</Typography>
           <Typography variant="body2" color="success.main">Save ₹15 using 15 SuperCoins</Typography>
         </Box>
         <Button variant="contained" color="primary" sx={{ alignSelf: 'center', m: 2 }}>Apply</Button>
-      </Card>
-
-      <Card variant="outlined" sx={{ display: 'flex', mb: 2 }}>
+      </Card> */}
+      <Cart/>
+      {/* <Card variant="outlined" sx={{ display: 'flex', mb: 2 }}>
         <CardMedia
           component="img"
           sx={{ width: 120 }}
@@ -60,7 +62,7 @@ function OrderSummary() {
 
           <Button variant="text" color="error" sx={{ mt: 1 }}>Remove</Button>
         </CardContent>
-      </Card>
+      </Card> */}
 
       <Divider sx={{ my: 2 }} />
 

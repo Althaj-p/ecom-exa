@@ -13,7 +13,10 @@ function OrderProcess() {
   const { user } = useContext(AuthContext); // Access user from AuthContext
   const isAuthenticated = !!user; // Check if user is authenticated
   const [activeStep, setActiveStep] = useState(isAuthenticated ? 1 : 0);
-  console.log(user,isAuthenticated,'authcheck')
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [paymentMethod, setPaymentMethod] = useState(null);
+  console.log(user,isAuthenticated,'authcheck12')
+  console.log(selectedAddress,paymentMethod,'authcheck')
 
   const handleNext = () => {
     if (activeStep < steps.length - 1) setActiveStep((prev) => prev + 1);
@@ -39,11 +42,11 @@ function OrderProcess() {
           <Login />
         );
       case 1:
-        return <AddressSelection />;
+        return <AddressSelection selectedAddress={selectedAddress} setSelectedAddress={setSelectedAddress}/>;
       case 2:
         return <OrderSummary />;
       case 3:
-        return <PaymentOptions />;
+        return <PaymentOptions paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/>;
       default:
         return <Typography>Unknown step</Typography>;
     }

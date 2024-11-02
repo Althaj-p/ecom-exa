@@ -1,5 +1,10 @@
 import { Typography,Button,Card,Grid,Divider,Box } from "@mui/material";
-const PriceDetails = () => (
+import { useSelector } from 'react-redux';
+const PriceDetails = () => {
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  const totalAmount = useSelector((state) => state.cart.totalAmount);
+  const itemsCount = useSelector((state) => state.cart.items.length);
+return(
     <Grid item xs={12} md={4}>
       <Card sx={{ padding: 2 }}>
         <Typography variant="h6" gutterBottom>
@@ -7,10 +12,10 @@ const PriceDetails = () => (
         </Typography>
         <Divider />
         <Box sx={{ marginTop: 2 }}>
-          <Typography>Price 2 items: ₹2000</Typography>
+          <Typography>Price {itemsCount} items: ₹{totalAmount.toLocaleString()}</Typography>
           <Typography>Delivery Charges: ₹40</Typography>
           <Typography variant="h6" sx={{ marginTop: 2 }}>
-            Total Amount: ₹2000
+            Total Amount: ₹{(totalAmount+40).toLocaleString()}
           </Typography>
           <Typography color="green" sx={{ marginTop: 1 }}>
             You will save ₹13,401 on this order
@@ -22,5 +27,5 @@ const PriceDetails = () => (
       </Card>
     </Grid>
   );
-
+}
   export default PriceDetails;
