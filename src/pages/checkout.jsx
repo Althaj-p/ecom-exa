@@ -6,6 +6,8 @@ import AddressSelection from '../components/Address';
 import OrderSummary from '../components/OrderSummary';
 import PaymentOptions from '../components/PaymentOptions';
 import PriceDetails from '../components/priceDetail';
+import axios from 'axios';
+import {Api} from '../data/Api';
 
 const steps = ['Login', 'Delivery Address', 'Order Summary', 'Payment Option'];
 
@@ -15,6 +17,7 @@ function OrderProcess() {
   const [activeStep, setActiveStep] = useState(isAuthenticated ? 1 : 0);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
+  const [loading, setLoading] = useState(false);
   console.log(user,isAuthenticated,'authcheck12')
   console.log(selectedAddress,paymentMethod,'authcheck')
 
@@ -26,8 +29,74 @@ function OrderProcess() {
     if (activeStep > 0) setActiveStep((prev) => prev - 1);
   };
 
-  const handlePlaceOrder = () => {
-    alert('Order placed successfully!');
+  // const handlePlaceOrder = async () => {
+  //   if (!selectedAddress || !paymentMethod) {
+  //     alert("Please select an address and payment method.");
+  //     return;
+  //   }
+
+  //   try {
+  //     setLoading(true);
+  //     const response = await axios.post(Api.createOrder, {
+  //       shipping_address_id: selectedAddress, // Assuming selectedAddress has an ID
+  //       payment_method: paymentMethod,
+  //     },
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+  //       },
+  //     }
+  //   );
+  //     alert('Order placed successfully!');
+  //     console.log('Order response:', response.data);
+  //     // Optionally, navigate to order confirmation page or clear the form here
+  //   } catch (error) {
+  //     console.error("Error placing order:", error);
+  //     alert("There was an issue placing your order. Please try again.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+  const handlePlaceOrder = async () => {
+    if (!selectedAddress || !paymentMethod) {
+      alert("Please select an address and payment method.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const orderResponse = await axios.post(Api.createOrder, {
+        shipping_address_id: selectedAddress,
+        payment_method: paymentMethod,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
+
+      const orderId = orderResponse.data.order_id;
+      alert('Order placed successfully!');
+
+      // Create a Stripe Checkout session for the order
+      const checkoutResponse = await axios.post(Api.createCheckoutSession, {
+        order_id: orderId,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
+
+      const { checkout_url } = checkoutResponse.data;
+      window.location.href = checkout_url;  // Redirect to Stripe Checkout
+
+    } catch (error) {
+      console.error("Error placing order or creating checkout session:", error);
+      alert("There was an issue with your order. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const renderStepContent = (step) => {
@@ -84,8 +153,8 @@ function OrderProcess() {
           </Button>
 
           {activeStep === steps.length - 1 ? (
-            <Button variant="contained" color="primary" onClick={handlePlaceOrder}>
-              Place Order
+            <Button variant="contained" color="primary" onClick={handlePlaceOrder} disabled={loading || !selectedAddress || !paymentMethod}>
+              {loading ? 'Placing Order...' : 'Place Order'}
             </Button>
           ) : (
             <Button

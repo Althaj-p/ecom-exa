@@ -6,4 +6,6 @@ export const Api = {
     'deleteFromCart':`${constants.port}/api/cart/delete`,
     'updateItemQuantity':`${constants.port}/api/cart/update-quantity/`,
     'shippingAddresses':`${constants.port}/api/checkout/shipping-addresses/`,
+    'createOrder':`${constants.port}/api/checkout/`,
+    'createCheckoutSession':`${constants.port}/api/checkout/create-checkout-session`,
 }
