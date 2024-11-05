@@ -1,16 +1,11 @@
-
 import React from "react";
-import { Box, Typography, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export default function Banner() {
-  const images = [
-    "https://via.placeholder.com/800x400?text=Image+1",
-    "https://via.placeholder.com/800x400?text=Image+2",
-    "https://via.placeholder.com/800x400?text=Image+3",
-  ];
+export default function Banner({ images }) {
+  console.log(images, 'images');
 
   const settings = {
     dots: true,
@@ -24,22 +19,47 @@ export default function Banner() {
 
   return (
     <Box sx={{ color: 'white', textAlign: 'center', p: 3 }}>
-      {/* <Typography variant="h4" gutterBottom>
-        Welcome to Our Website
-      </Typography>
-      <Typography variant="body1" gutterBottom>
-        We offer amazing products and services.
-      </Typography> */}
-      <Slider {...settings}>
-        {images.map((image, index) => (
-          <Box key={index}>
-            <img src={image} alt={`Slide ${index + 1}`} style={{ width: '100%', height: '200px' }} />
-          </Box>
-        ))}
-      </Slider>
-      {/* <Button variant="contained" color="secondary" sx={{ mt: 2 }}>
-        Learn More
-      </Button> */}
+      {images.length === 1 ? (
+        <Box>
+          {images[0].link_url ? (
+            <a href={images[0].link_url} target="_blank" rel="noopener noreferrer">
+              <img
+                src={images[0].image}
+                alt={images[0].title||'Banner'}
+                style={{ width: '100%', height: '200px' }}
+              />
+            </a>
+          ) : (
+            <img
+              src={images[0].image}
+              alt={images[0].title||'Banner'}
+              style={{ width: '100%', height: '200px' }}
+            />
+          )}
+        </Box>
+      ) : (
+        <Slider {...settings}>
+          {images.map((image, index) => (
+            <Box key={index}>
+              {image.link_url ? (
+                <a href={image.link_url} target="_blank" rel="noopener noreferrer">
+                  <img
+                    src={image.image}
+                    alt={image.title||`Banner ${index + 1}`}
+                    style={{ width: '100%', height: '200px' }}
+                  />
+                </a>
+              ) : (
+                <img
+                  src={image.image}
+                  alt={image.title||`Banner ${index + 1}`}
+                  style={{ width: '100%', height: '200px' }}
+                />
+              )}
+            </Box>
+          ))}
+        </Slider>
+      )}
     </Box>
   );
 }

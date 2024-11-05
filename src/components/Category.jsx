@@ -56,7 +56,7 @@ export default function Category() {
             style={{ marginRight: '20px', textDecoration: 'none' }} 
           >
             <img
-              src={`${constants.port}${category.image}`}
+              src={category.image?`${constants.port}${category.image}`:'https://via.placeholder.com/300x200'}
               alt={category.name || "Category Image"}
               style={{ width: 80, height: 80, borderRadius: "50%" }}
             />
