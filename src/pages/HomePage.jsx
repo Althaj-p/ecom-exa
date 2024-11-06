@@ -5,14 +5,16 @@ import Category from '../components/Category';
 import CategorySection from '../components/HomeCategoryItems';
 import { useState,useEffect } from "react";
 import axios from 'axios';
+import PopularProducts from "../components/Home/PopularProducts";
 export default function HomePage() {
     const [categoryItems, setCategoryItems] = useState([]);
     const [bannerData, setBannerData] = useState([]);
     const [productData, setProductData] = useState([]);
+    const [popularProducts, setPopularProducts] = useState([]);
     useEffect(() => {
         // Fetch category items
         // fetch("API_URL/categories")
-        //   .then(response => response.json())
+        //   .then(response => response.json()) 
         //   .then(data => setCategoryItems(data));
           
         // Fetch banner data
@@ -26,21 +28,26 @@ export default function HomePage() {
         };
 
         fetchBanners();
+        const fetchPopularProducts = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/api/popular-varients');
+                setPopularProducts(response.data.variants);
+            } catch (error) {
+                console.error("Error fetching banners:", error);
+            }
+        };
+
+        fetchPopularProducts();
         
-        // Fetch product data
-        // fetch("API_URL/products")
-        //   .then(response => response.json())
-        //   .then(data => setProductData(data));
       }, []);
+      console.log(popularProducts,'popularproducts')
     return (
         <>
         
             <Category />
             <Banner images={bannerData}/>
+            <PopularProducts products={popularProducts}/>
             <CategorySection />
-            <CategorySection />
-            <CategorySection />
-            <ProductDisplay />
         </>
     )
 }

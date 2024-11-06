@@ -500,7 +500,7 @@ export default function ProductDisplay() {
                       >
                         {truncateText(product.product.name, 30)}
                       </Typography>
-                      <Typography variant="body2" color="text.secondary" mb={1}>
+                      <Typography variant="body2" color="text.secondary" mb={1} minHeight={40}>
                         {truncateText(product.product.description, 50)}
                       </Typography>
                         <Box display="flex" alignItems="center" mb={1}>
