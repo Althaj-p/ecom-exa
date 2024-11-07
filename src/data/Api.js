@@ -8,4 +8,6 @@ export const Api = {
     'shippingAddresses':`${constants.port}/api/checkout/shipping-addresses/`,
     'createOrder':`${constants.port}/api/checkout/`,
     'createCheckoutSession':`${constants.port}/api/checkout/create-checkout-session`,
+    'recentlyViewed':`${constants.port}/api/recently-viewed-variants`,
+    'topOffers':`${constants.port}/api/top-offer-product-variants`,
 }

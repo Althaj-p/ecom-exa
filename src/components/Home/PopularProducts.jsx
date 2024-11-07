@@ -2,6 +2,7 @@ import ProductItem from "../ProductItem";
 import { Grid,Typography} from "@mui/material";
 
 export default function PopularProducts({ products }) {
+  if (!products || products.length === 0)return null;
   return (
     <Grid item xs={12} md={12} sx={{mt:2,p:3}}>
         <Typography variant="h5" gutterBottom>

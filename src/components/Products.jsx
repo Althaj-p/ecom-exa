@@ -344,6 +344,7 @@ import Axios from "axios";
 import { Link } from "react-router-dom";
 import { Api } from "../data/Api";
 import constants from "../data/constants";
+import { useSearchParams } from "react-router-dom";
 
 export default function ProductDisplay() {
   const [priceRange, setPriceRange] = useState([749, 3620.88]);
@@ -355,6 +356,8 @@ export default function ProductDisplay() {
     category: [],
   });
   const [sortOption, setSortOption] = useState("latest");
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get('category');
 
   const handlePriceChange = (event, newValue) => {
     setPriceRange(newValue);
@@ -374,7 +377,7 @@ export default function ProductDisplay() {
   };
 
   useEffect(() => {
-    Axios.get(Api.products)
+    Axios.get(`${Api.products}?category=${category}`)
       .then((res) => {
         if (res.data.status === 1) {
           setProducts(res.data.variants);

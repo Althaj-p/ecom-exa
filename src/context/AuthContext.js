@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
         console.log(decodedUser,'decodeduser')
         setUser(decodedUser); // Store user details in context
 
-        navigate('/dashboard');
+        navigate('/');
 
     };
 

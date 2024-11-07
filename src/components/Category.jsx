@@ -2,9 +2,11 @@ import { Container, Box, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
 import Axios from "axios";
 import constants from '../data/constants';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Category() {
-  const [categories_list, setCategories] = useState([])
+  const navigate = useNavigate();
+  const [categories_list, setCategories] = useState([]);
   useEffect(() => {
     Axios.get(`${constants.port}/api/categories`, {})
       .then((res) => {
@@ -47,6 +49,7 @@ export default function Category() {
         }}
       >
         {categories_list.map((category, index) => (
+          <Link to={`products?category=${category.slug}`}>
           <Box
             key={index}
             component="a"
@@ -64,6 +67,7 @@ export default function Category() {
               <Typography variant="body1" style={{ textDecoration: 'none', color: 'black' }}>{category.name}</Typography>
             )}
           </Box>
+          </Link>
         ))}
       </Box>
     </Container>);
